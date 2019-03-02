@@ -14,13 +14,17 @@ const renderFilter = (filterId) => `
     checked
   />
   <label for="filter__${filterId}" class="filter__label">
-    ALL <span class="filter__${filterId}-count">15</span></label
+    ${filterId} <span class="filter__${filterId}-count">${generateRandomInt(0, 15)}</span></label
   >
 `;
 
 
+/**
+ * Render card html code
+ * TODO: Add parameters
+ */
 const renderCard = () => `
-  <article class="card card--edit card--black">
+  <article class="card card--edit-31337 card--black">
   <form class="card__form" method="get">
     <div class="card__inner">
       <div class="card__control">
@@ -269,4 +273,37 @@ const renderCard = () => `
   </article>
 `;
 
-// insertAdjacentHTML().
+
+/**
+ * Inserts html code inside an element before closing tag
+ * @param {Element} element 
+ * @param {string} html 
+ */
+const insertHTMLToElement = (element, html) => {
+  element.insertAdjacentHTML('beforeend', html);
+}
+
+
+/**
+ * Return random number in range
+ * @param {number} min
+ * @param {number} max
+ */
+const generateRandomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+
+// Drawing filters
+const mainFilter = document.querySelector(`.main__filter`);
+const filterIds = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
+filterIds.forEach((filterId) => {
+  let filterHtml = renderFilter(filterId);
+  insertHTMLToElement(mainFilter, filterHtml);
+});
+
+// Drawing cards
+const tasksBoard = document.querySelector('.board__tasks');
+for (let i = 0; i < 7; i++) {
+  let cardHmtl = renderCard();
+  insertHTMLToElement(tasksBoard, cardHmtl);
+}
