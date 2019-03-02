@@ -22,6 +22,7 @@ const renderFilter = (filterId) => `
 /**
  * Render card html code
  * TODO: Add parameters
+ * @return {string} formated html code of the card
  */
 const renderCard = () => `
   <article class="card card--edit-31337 card--black">
@@ -276,18 +277,19 @@ const renderCard = () => `
 
 /**
  * Inserts html code inside an element before closing tag
- * @param {Element} element 
- * @param {string} html 
+ * @param {Element} element
+ * @param {string} html
  */
 const insertHTMLToElement = (element, html) => {
-  element.insertAdjacentHTML('beforeend', html);
-}
+  element.insertAdjacentHTML(`beforeend`, html);
+};
 
 
 /**
  * Return random number in range
  * @param {number} min
  * @param {number} max
+ * @return {number} integer in range
  */
 const generateRandomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -302,7 +304,7 @@ filterIds.forEach((filterId) => {
 });
 
 // Drawing cards
-const tasksBoard = document.querySelector('.board__tasks');
+const tasksBoard = document.querySelector(`.board__tasks`);
 for (let i = 0; i < 7; i++) {
   let cardHmtl = renderCard();
   insertHTMLToElement(tasksBoard, cardHmtl);
