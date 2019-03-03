@@ -295,7 +295,21 @@ const generateRandomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
 
-// Drawing filters
+/**
+ * Render multiple cards to tasks board
+ * @param {number} quantity number of cards to draw
+ */
+const addMultipleCards = (quantity) => {
+  const tasksBoard = document.querySelector(`.board__tasks`);
+  tasksBoard.innerHTML = ``;
+  for (let i = 0; i < quantity; i++) {
+    let cardHmtl = renderCard();
+    insertHTMLToElement(tasksBoard, cardHmtl);
+  }
+};
+
+
+// Drawing filters (task 5)
 const mainFilter = document.querySelector(`.main__filter`);
 const filterIds = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
 filterIds.forEach((filterId) => {
@@ -303,9 +317,13 @@ filterIds.forEach((filterId) => {
   insertHTMLToElement(mainFilter, filterHtml);
 });
 
-// Drawing cards
-const tasksBoard = document.querySelector(`.board__tasks`);
-for (let i = 0; i < 7; i++) {
-  let cardHmtl = renderCard();
-  insertHTMLToElement(tasksBoard, cardHmtl);
-}
+// Drawing cards (task 6)
+addMultipleCards(7);
+
+// Adding random quantity of tasks on filter click (task 7)
+document.addEventListener(`click`, (evt) => {
+  if (evt.target.classList.contains(`filter__label`)) {
+    addMultipleCards(generateRandomInt(3, 10));
+  }
+});
+
