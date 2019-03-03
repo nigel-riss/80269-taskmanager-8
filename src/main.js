@@ -326,4 +326,3 @@ document.addEventListener(`click`, (evt) => {
     addMultipleCards(generateRandomInt(3, 10));
   }
 });
-
