@@ -301,21 +301,23 @@ const generateRandomInt = (min, max) =>
  */
 const addMultipleCards = (quantity) => {
   const tasksBoard = document.querySelector(`.board__tasks`);
-  tasksBoard.innerHTML = ``;
+  tasksBoard.innerHTML = ``; // Cleaning existing content
+  let cardsHmtl = ``;
   for (let i = 0; i < quantity; i++) {
-    let cardHmtl = renderCard();
-    insertHTMLToElement(tasksBoard, cardHmtl);
+    cardsHmtl += renderCard();
   }
+  insertHTMLToElement(tasksBoard, cardsHmtl);
 };
 
 
 // Drawing filters (task 5)
 const mainFilter = document.querySelector(`.main__filter`);
 const filterIds = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
+let filtersHtml = ``;
 filterIds.forEach((filterId) => {
-  let filterHtml = renderFilter(filterId);
-  insertHTMLToElement(mainFilter, filterHtml);
+  filtersHtml += renderFilter(filterId);
 });
+insertHTMLToElement(mainFilter, filtersHtml);
 
 // Drawing cards (task 6)
 addMultipleCards(7);
