@@ -15,5 +15,4 @@ node_modules/
 build/
 
 # Bundle files
-public/bundle.js
-public/bundle.js.map
+public/js
