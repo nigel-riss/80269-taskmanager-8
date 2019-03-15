@@ -1,10 +1,48 @@
 /**
+ * Render tag html code
+ * @param {string} tagName
+ * @return {string}
+ */
+const renderTag = (tagName) => `
+  <span class="card__hashtag-inner">
+    <input
+      type="hidden"
+      name="hashtag"
+      value="${tagName}"
+      class="card__hashtag-hidden-input"
+    />
+    <button type="button" class="card__hashtag-name">
+      #${tagName}
+    </button>
+    <button type="button" class="card__hashtag-delete">
+      delete
+    </button>
+  </span>
+`;
+
+
+/**
+ * Render html from array of tag names
+ * @param {Set.<string>} tagNames array of tag names
+ * @return {string}
+ */
+const renderTags = (tagNames) => {
+  return [...tagNames].map((tagName) => renderTag(tagName)).join(``);
+  // let tagsHtml = ``;
+  // for (const tagName of tagNames) {
+  //   tagsHtml += renderTag(tagName);
+  // }
+  // return tagsHtml;
+};
+
+
+/**
  * Render card html code
- * TODO: Add parameters
+ * @param {Object} task
  * @return {string} formated html code of the card
  */
-const renderCard = () => `
-  <article class="card card--edit-31337 card--black">
+const renderCard = (task) => `
+  <article class="card card--edit-31337 card--${task.color}">
   <form class="card__form" method="get">
     <div class="card__inner">
       <div class="card__control">
@@ -34,9 +72,7 @@ const renderCard = () => `
             class="card__text"
             placeholder="Start typing your text here..."
             name="text"
-          >
-  This is example of new task, you can add picture, set date and time, add tags.</textarea
-          >
+          >${task.title}</textarea>
         </label>
       </div>
 
@@ -150,7 +186,7 @@ const renderCard = () => `
           </div>
 
           <div class="card__hashtag">
-            <div class="card__hashtag-list"></div>
+            <div class="card__hashtag-list">${renderTags(task.tags)}</div>
 
             <label>
               <input
@@ -163,14 +199,14 @@ const renderCard = () => `
           </div>
         </div>
 
-        <label class="card__img-wrap card__img-wrap--empty">
+        <label class="card__img-wrap <!--card__img-wrap--empty-->">
           <input
             type="file"
             class="card__img-input visually-hidden"
             name="img"
           />
           <img
-            src="img/add-photo.svg"
+            src="${task.picture}"
             alt="task picture"
             class="card__img"
           />

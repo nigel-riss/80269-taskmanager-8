@@ -1,6 +1,9 @@
 import renderFilter from './modules/render-filter';
 import renderCard from './modules/render-card';
-import {insertHTMLToElement, generateRandomInt} from './modules/utils';
+import getTask from './modules/get-task';
+import {insertHTMLToElement, getRandomInt} from './modules/utils';
+import task from './modules/get-task';
+console.log(task);
 
 
 /**
@@ -12,7 +15,7 @@ const addMultipleCards = (quantity) => {
   tasksBoard.innerHTML = ``; // Cleaning existing content
   let cardsHmtl = ``;
   for (let i = 0; i < quantity; i++) {
-    cardsHmtl += renderCard();
+    cardsHmtl += renderCard(getTask());
   }
   insertHTMLToElement(tasksBoard, cardsHmtl);
 };
@@ -33,6 +36,6 @@ addMultipleCards(7);
 // Adding random quantity of tasks on filter click (task 7)
 document.addEventListener(`click`, (evt) => {
   if (evt.target.classList.contains(`filter__label`)) {
-    addMultipleCards(generateRandomInt(3, 10));
+    addMultipleCards(getRandomInt(3, 10));
   }
 });

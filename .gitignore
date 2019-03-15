@@ -16,3 +16,5 @@ build/
 
 # Bundle files
 public/js
+bundle.js
+bundle.js.map

@@ -1,4 +1,4 @@
-import {generateRandomInt} from './utils';
+import {getRandomInt} from './utils';
 
 /**
  * Render filter html code
@@ -14,7 +14,7 @@ const renderFilter = (filterId) => `
     checked
   />
   <label for="filter__${filterId}" class="filter__label">
-    ${filterId} <span class="filter__${filterId}-count">${generateRandomInt(0, 15)}</span></label
+    ${filterId} <span class="filter__${filterId}-count">${getRandomInt(0, 15)}</span></label
   >
 `;
 
